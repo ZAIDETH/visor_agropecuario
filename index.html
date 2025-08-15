@@ -1092,12 +1092,27 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['DEPARTAMEN'] !== null?String('<div style="color: #323232; font-size: 5pt; font-weight: bold; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['DEPARTAMEN']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_Departamentos_6'});
+            // Obtener el centro del polígono (centroide)
+            var centroid = layer.getBounds().getCenter();
+            layer.bindTooltip(
+                (layer.feature.properties['DEPARTAMEN'] !== null
+                    ? String('<div style="color: rgba(255, 255, 255, 1); font-size: 5pt; font-weight: bold; font-family: \'Open Sans\', sans-serif; text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); text-align: center;">' + layer.feature.properties['DEPARTAMEN'] + '</div>')
+                    : ''
+                ), 
+                { 
+                    permanent: true,  // Mostrar permanentemente
+                    offset: [0, 0],  // Ajuste de la posición
+                    className: 'css_Departamentos_6',  // Estilo CSS
+                    direction: 'center',  // Centrar el tooltip
+                    // Establecer la posición manualmente en el centro del polígono
+                    latlng: centroid
+                }
+            );
             labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
+                    totalMarkers += 1;
+                    layer.added = true;
+                    addLabel(layer, i);
+                    i++;
         });
         var i = 0;
         layer_Distritos_7.eachLayer(function(layer) {
