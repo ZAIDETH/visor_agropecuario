@@ -148,18 +148,17 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(String(feature.properties['OBJECTID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['gridcode'] !== null ? autolinker.link(String(feature.properties['gridcode']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
+                    </tr>\-->                    <tr>\
                         <th scope="row">UBIGEO</th>\
                         <td>' + (feature.properties['UBIGEO'] !== null ? autolinker.link(String(feature.properties['UBIGEO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">DEPARTAMENTO</th>\
+                    <th scope="row">DEPARTAMENTO</th>\
                         <td>' + (feature.properties['NOMBDEP'] !== null ? autolinker.link(String(feature.properties['NOMBDEP']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -178,13 +177,13 @@
                         <th scope="row">ZONAS PRIORITARIAS</th>\
                         <td>' + (feature.properties['ZONAS_PRIORITARIAS'] !== null ? autolinker.link(String(feature.properties['ZONAS_PRIORITARIAS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['Shape_Length'] !== null ? autolinker.link(String(feature.properties['Shape_Length']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Shape_Area'] !== null ? autolinker.link(String(feature.properties['Shape_Area']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                </table>';
+                --></table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
 			layer.on('popupopen', function(e) {
 				addClassToPopupIfMedia(content, e.popup);
@@ -272,10 +271,10 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(String(feature.properties['OBJECTID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    --><tr>\
                         <th scope="row">CENTRO POBLADO</th>\
                         <td>' + (feature.properties['NOMBCCPP'] !== null ? autolinker.link(String(feature.properties['NOMBCCPP']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -308,11 +307,11 @@
                         <td>' + (feature.properties['TotalAtenciones'] !== null ? autolinker.link(String(feature.properties['TotalAtenciones']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Sexo_F</th>\
+                        <th scope="row">Sexo Femenino</th>\
                         <td>' + (feature.properties['Sexo_F'] !== null ? autolinker.link(String(feature.properties['Sexo_F']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Sexo_M</th>\
+                        <th scope="row">Sexo_Másculino</th>\
                         <td>' + (feature.properties['Sexo_M'] !== null ? autolinker.link(String(feature.properties['Sexo_M']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -324,15 +323,15 @@
                         <td>' + (feature.properties['Edad_promedio'] !== null ? autolinker.link(String(feature.properties['Edad_promedio']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">NivelGobierno</th>\
+                        <th scope="row">Nivel Gobierno</th>\
                         <td>' + (feature.properties['NivelGobierno'] !== null ? autolinker.link(String(feature.properties['NivelGobierno']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">NombrePIAS</th>\
+                        <th scope="row">Nombre PIAS</th>\
                         <td>' + (feature.properties['NombrePIAS'] !== null ? autolinker.link(String(feature.properties['NombrePIAS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">NombrePIASResum</th>\
+                        <th scope="row">Nombre PIAS Resum</th>\
                         <td>' + (feature.properties['NombrePIASResum'] !== null ? autolinker.link(String(feature.properties['NombrePIASResum']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -352,10 +351,10 @@
                         <td>' + (feature.properties['NomEquipoPias'] !== null ? autolinker.link(String(feature.properties['NomEquipoPias']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Total_Usuarios</th>\
+                        <th scope="row">Total Usuarios</th>\
                         <td>' + (feature.properties['Total_Usuarios'] !== null ? autolinker.link(String(feature.properties['Total_Usuarios']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['Rango_0_5'] !== null ? autolinker.link(String(feature.properties['Rango_0_5']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -549,7 +548,7 @@
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['sdPeriodo'] !== null ? autolinker.link(String(feature.properties['sdPeriodo']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    --></tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
 			layer.on('popupopen', function(e) {
@@ -605,15 +604,15 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(String(feature.properties['OBJECTID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                   --><tr>\
                         <th scope="row">Semestre</th>\
                         <td>' + (feature.properties['Semestre'] !== null ? autolinker.link(String(feature.properties['Semestre']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">De_Fuente</th>\
+                        <th scope="row">Servicio</th>\
                         <td>' + (feature.properties['De_Fuente'] !== null ? autolinker.link(String(feature.properties['De_Fuente']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -629,11 +628,11 @@
                         <td>' + (feature.properties['Distrito'] !== null ? autolinker.link(String(feature.properties['Distrito']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Nombre_Centro_Atencion</th>\
+                        <th scope="row">Nombre Centro Atención</th>\
                         <td>' + (feature.properties['Nombre_Centro_Atencion'] !== null ? autolinker.link(String(feature.properties['Nombre_Centro_Atencion']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Direccion_Centro_Atencion</th>\
+                        <th scope="row">Dirección Centro Atención</th>\
                         <td>' + (feature.properties['Direccion_Centro_Atencion'] !== null ? autolinker.link(String(feature.properties['Direccion_Centro_Atencion']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -748,13 +747,13 @@
                 mouseover: highlightFeature,
             });
             var popupContent = '<table>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(String(feature.properties['OBJECTID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['N_'] !== null ? autolinker.link(String(feature.properties['N_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    --><tr>\
                         <th scope="row">MES</th>\
                         <td>' + (feature.properties['MES'] !== null ? autolinker.link(String(feature.properties['MES']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -762,9 +761,9 @@
                         <th scope="row">AÑO</th>\
                         <td>' + (feature.properties['AÑO'] !== null ? autolinker.link(String(feature.properties['AÑO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['F_FECHA_'] !== null ? autolinker.link(String(feature.properties['F_FECHA_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    --></tr>\
                     <tr>\
                         <th scope="row">CODIGO PLATAFORMA</th>\
                         <td>' + (feature.properties['CODIGO_PLATAFORMA'] !== null ? autolinker.link(String(feature.properties['CODIGO_PLATAFORMA']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -832,7 +831,7 @@
                         <th scope="row">FECHA DE INICIO DE SERVICIOS</th>\
                         <td>' + (feature.properties['FECHA_DE_INICIO_DE_SERVICIOS'] !== null ? autolinker.link(String(feature.properties['FECHA_DE_INICIO_DE_SERVICIOS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['LONGITUD__X_'] !== null ? autolinker.link(String(feature.properties['LONGITUD__X_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -840,7 +839,7 @@
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['NOTA'] !== null ? autolinker.link(String(feature.properties['NOTA']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    --></tr>\
                     <tr>\
                         <th scope="row">UBIGEO</th>\
                         <td>' + (feature.properties['UBIGEO'] !== null ? autolinker.link(String(feature.properties['UBIGEO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -967,9 +966,9 @@
                         <th scope="row">Distrito</th>\
                         <td class="visible-with-data" id="NOMBDIST">' + (feature.properties['NOMBDIST'] !== null ? autolinker.link(String(feature.properties['NOMBDIST']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                    <tr>\
+                    <!--<tr>\
                         <td colspan="2">' + (feature.properties['areakm2'] !== null ? autolinker.link(String(feature.properties['areakm2']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
+                    --></tr>\
                 </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
 			layer.on('popupopen', function(e) {

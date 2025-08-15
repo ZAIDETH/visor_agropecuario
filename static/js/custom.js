@@ -1,4 +1,5 @@
 window.onload = function() {
+    
     // Asumiendo que 'map' es el objeto del mapa creado con Leaflet
     // Ajusta la vista inicial a las coordenadas deseadas y el nivel de zoom
     map.setView([-10,-75], 5);  // Coordenadas de Perú y nivel de zoom de 6
