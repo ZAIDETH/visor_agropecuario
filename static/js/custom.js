@@ -1,17 +1,61 @@
-window.onload = function() {
-    
-    // Asumiendo que 'map' es el objeto del mapa creado con Leaflet
-    // Ajusta la vista inicial a las coordenadas deseadas y el nivel de zoom
-    map.setView([-10,-75], 5);  // Coordenadas de Perú y nivel de zoom de 6
+window.onload = function () {
+  // Asegúrate de que html/body/#map tengan altura (en tu CSS global):
+  // html, body { height: 100%; margin:0; }
+  // #map { height: 100%; }
 
-    // Si prefieres usar un zoom más cercano o más lejano, ajusta el número del zoom (por ejemplo, 10, 5, etc.)
-    // map.setView([-9.19, -75.0152], 5);  // Menor número = zoom más alejado
+  // 1) setView OK
+  map.setView([-9.2, -75], 5);
 
-    // Crear barra de encabezado con toggle y texto alineados
-    const controlLayersElement = document.querySelector('.leaflet-control-layers');
-    const toggleControl = document.querySelector('.leaflet-control-layers-toggle');
+  // Utilidad: invalidar tamaño de forma segura y con debounce
+  let invTimer = null;
+  const invalidate = (delay = 0) => {
+    clearTimeout(invTimer);
+    invTimer = setTimeout(() => map.invalidateSize({animate:false}), delay);
+  };
 
-    // Crear contenedor combinado
+  // 2) Header
+  const header = document.createElement('div');
+  header.style.height = '60px';                 // usa 60px reales
+  header.style.backgroundColor = '#2a7bf4';
+  header.style.display = 'flex';
+  header.style.alignItems = 'center';
+  header.style.padding = '5px 15px';
+  header.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+  header.style.zIndex = '1000';
+  header.style.position = 'relative';
+  header.style.opacity = '1';
+
+  const logo = document.createElement('img');
+  logo.src = 'static/img/LogoOficialMIDIS.jpg';
+  logo.alt = 'Logo del MIDIS';
+  logo.style.height = '90%';
+  logo.style.marginRight = '2%';
+
+  const title = document.createElement('div');
+  title.innerText = 'Visor de las Zonas Prioritarias de Atención de los programas sociales en el marco del desarrollo productivo agropecuario';
+  title.style.fontSize = '100%';
+  title.style.fontWeight = 'bold';
+  title.style.color = '#fefefe';
+  title.style.fontFamily = 'sans-serif';
+  title.style.textAlign = 'left';
+
+  header.appendChild(logo);
+  header.appendChild(title);
+  document.body.insertBefore(header, document.getElementById('map'));
+
+  // 3) Ajusta el alto del mapa exactamente al header
+  const mapElement = document.getElementById('map');
+  mapElement.style.width = '100%';
+  mapElement.style.height = 'calc(100% - 60px)'; // antes tenías 50 vs 60 => inconsistencia
+  invalidate(0); // invalida inmediatamente tras cambiar el layout
+
+  // 4) Control de capas (con null-check por si no existe todavía)
+  const controlLayersElement = document.querySelector('.leaflet-control-layers');
+  const toggleControl = document.querySelector('.leaflet-control-layers-toggle');
+
+  if (controlLayersElement && toggleControl) {
+    controlLayersElement.style.color = '#fff';
+
     const headerBar = document.createElement('div');
     headerBar.style.display = 'flex';
     headerBar.style.alignItems = 'center';
@@ -27,49 +71,39 @@ window.onload = function() {
     headerBar.style.opacity = '1';
     headerBar.style.height = '40px';
 
-    // Crear texto
     const headerText = document.createElement('span');
     headerText.innerText = '🗂 Lista de Capas';
+    headerText.style.fontSize = '12px';
 
-    // Mover el botón toggle dentro del header
     headerBar.appendChild(headerText);
     headerBar.appendChild(toggleControl);
-
-    // Insertar al principio del control
     controlLayersElement.insertBefore(headerBar, controlLayersElement.firstChild);
 
-    // Crear encabezado de la página
-    const header = document.createElement('div');
-    header.style.height = '50px';
-    header.style.backgroundColor = '#2a7bf4';
-    header.style.display = 'flex';
-    header.style.alignItems = 'center';
-    header.style.padding = '5px 15px';
-    header.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-    header.style.zIndex = '1000';
-    header.style.position = 'relative';
-    header.style.opacity = '1';
+    // Responsivo
+    const setLayersWidth = () => {
+      controlLayersElement.style.width = (window.innerWidth < 650) ? '100%' : '80%';
+    };
+    setLayersWidth();
+    window.addEventListener('resize', () => {
+      setLayersWidth();
+      invalidate(50); // al cambiar el layout por resize, vuelve a invalidar
+    });
 
-    const logo = document.createElement('img');
-    logo.src = 'static/img/LogoOficialMIDIS.jpg';
-    logo.alt = 'Logo del MIDIS';
-    logo.style.height = '40px';
-    logo.style.marginRight = '15px';
+    // Colapsar/expandir
+    let isLayersListExpanded = true;
+    toggleControl.addEventListener('click', () => {
+      if (isLayersListExpanded) {
+        controlLayersElement.classList.remove('leaflet-control-layers-expanded');
+        controlLayersElement.style.width = '80%';
+      } else {
+        controlLayersElement.classList.add('leaflet-control-layers-expanded');
+        setLayersWidth();
+      }
+      isLayersListExpanded = !isLayersListExpanded;
+      invalidate(50); // invalida tras animaciones/cambios de ancho
+    });
+  }
 
-    const title = document.createElement('div');
-    title.innerText = 'Visor de las Zonas geográficas prioritarias de atención de los programas sociales en el marco del desarrollo productivo agropecuario';
-    title.style.fontSize = '16px';
-    title.style.fontWeight = 'bold';
-    title.style.color = '#fefefe';
-    title.style.fontFamily = 'sans-serif';
-    title.style.textAlign = 'center';  // Asegura que el título se vea centrado
-
-    header.appendChild(logo);
-    header.appendChild(title);
-    document.body.insertBefore(header, document.getElementById('map'));
-
-    // Personalizar mapa para que respete el espacio para el encabezado
-    const mapElement = document.getElementById('map');
-    mapElement.style.width = '100%';
-    mapElement.style.height = 'calc(100% - 60px)';  // Deja espacio para el encabezado
+  // 5) Por si hay fuentes/capas que se añaden asíncronamente, re-valida al final del onload
+  invalidate(100);
 };
